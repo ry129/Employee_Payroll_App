@@ -28,7 +28,7 @@ public class EmployeePayrollData {
     public long getSalary(){
         return salary;
     }
-    public void getSalary(long salary){
+    public void setSalary(long salary){
         this.salary=salary;
     }
 
