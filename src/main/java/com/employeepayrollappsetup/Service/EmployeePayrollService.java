@@ -1,6 +1,7 @@
 package com.employeepayrollappsetup.Service;
 
 import com.employeepayrollappsetup.DTO.EmployeePayrollDTO;
+import com.employeepayrollappsetup.Exceptions.EmployeePayrollException;
 import com.employeepayrollappsetup.model.EmployeePayrollData;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,10 +18,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
     // ✅ Get Employee By ID (With Validation)
     public EmployeePayrollData getEmployeePayrollDataById(int empId) {
-        if (empId <= 0 || empId > employeePayrollList.size()) {
-            throw new RuntimeException("Employee with ID " + empId + " not found");
-        }
-        return employeePayrollList.get(empId - 1);
+        return employeePayrollList.stream().filter(empData ->empData.getEmployeeId()==empId).findFirst().orElseThrow(() -> new EmployeePayrollException("Employee NOt Found"));
+
     }
 
     // ✅ Create New Employee
