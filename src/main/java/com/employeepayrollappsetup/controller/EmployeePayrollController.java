@@ -4,6 +4,7 @@ import com.employeepayrollappsetup.DTO.ResponseDTO;
 
 import com.employeepayrollappsetup.Service.IEmployeePayrollService;
 import com.employeepayrollappsetup.model.EmployeePayrollData;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,10 +38,10 @@ public class EmployeePayrollController {
 
     // POST create employee
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> addNewEmployeePayrollData(@RequestBody EmployeePayrollDTO empPayrollDTO) {
+    public ResponseEntity<ResponseDTO> addNewEmployeePayrollData( @Valid @RequestBody EmployeePayrollDTO empPayrollDTO) {
         EmployeePayrollData empData = employeePayrollService.createEmployeePayrollData(empPayrollDTO);
         ResponseDTO responseDTO = new ResponseDTO("Post Call Successful", empData);
-        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     // PUT update employee
